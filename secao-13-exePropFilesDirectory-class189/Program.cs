@@ -42,10 +42,11 @@ namespace secao_13_exePropFilesDirectory_class189
                         sw.WriteLine("Product name:" + prod.Name + ", " + "R$" + prod.Price.ToString("F2", CultureInfo.InstalledUICulture) + ", Quantities: " + prod.Quantity);
                     }
                 }
-                string sourcetPath = Path.GetDirectoryName(nFile);
+                string sourcetPath = Path.GetDirectoryName(path);
                 string targetFolderPath = sourcetPath + @"\out";
                 string targetFilePath = targetFolderPath + $@"\{nFile}_summary.csv";
                 Directory.CreateDirectory(targetFolderPath);
+                DateTime date = DateTime.Now;
 
                 using (StreamWriter sw = File.AppendText(targetFilePath))
                 {
@@ -56,7 +57,7 @@ namespace secao_13_exePropFilesDirectory_class189
                         double price = double.Parse(fields[1], CultureInfo.InvariantCulture);
                         int quantity = int.Parse(fields[2]);
                         Products prod = new Products(name, price, quantity);
-                        sw.WriteLine("Product name:" + prod.Name + ", " + "R$" + prod.SumSales().ToString("F2", CultureInfo.InstalledUICulture));
+                        sw.WriteLine(prod.Name +","+ prod.SumSales().ToString("F2", CultureInfo.InstalledUICulture) +","+ date.ToString("dd/MM/yyyy"));
                     }
                 }
             }
